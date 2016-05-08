@@ -3,12 +3,12 @@ import { module, test } from 'qunit';
 import MemoryStorage from 'ember-preferences/storage/memory';
 import DecoratorStoreMixin from 'ember-preferences/storage/decorator';
 
-var subject,
-    actualStorage;
+let subject;
+let actualStorage;
 
 module('Unit | Storage | decorator mixin', {
   beforeEach() {
-    var decorator = Ember.Object.extend(DecoratorStoreMixin);
+    let decorator = Ember.Object.extend(DecoratorStoreMixin);
 
     actualStorage = MemoryStorage.create();
     subject = decorator.create({ content: actualStorage });

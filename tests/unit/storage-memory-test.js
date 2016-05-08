@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import MemoryStorage from 'ember-preferences/storage/memory';
 
-var subject;
+let subject;
 
 module('Unit | Storage | memory storage', {
   beforeEach() {

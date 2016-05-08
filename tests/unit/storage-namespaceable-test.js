@@ -2,8 +2,8 @@ import { module, test } from 'qunit';
 import MemoryStorage from 'ember-preferences/storage/memory';
 import NamespaceableStorage from 'ember-preferences/storage/namespaceable';
 
-var subject,
-    actualStorage;
+let subject;
+let actualStorage;
 
 module('Unit | Storage | namespaceable decorator', {
   beforeEach() {

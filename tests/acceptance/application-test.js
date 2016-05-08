@@ -3,7 +3,7 @@ import moduleForAcceptance from '../../tests/helpers/module-for-acceptance';
 import Ombu from 'ember-ombu';
 /* global localStorage */
 
-var page = Ombu.create({
+const page = Ombu.create({
   visit: '/',
 
   simple: {

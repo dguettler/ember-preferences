@@ -2,8 +2,8 @@ import { module, test } from 'qunit';
 import MemoryStorage from 'ember-preferences/storage/memory';
 import SerializableStore from 'ember-preferences/storage/serializable';
 
-var subject,
-    actualStorage;
+let subject;
+let actualStorage;
 
 module('Unit | Storage | serializable decorator', {
   beforeEach() {

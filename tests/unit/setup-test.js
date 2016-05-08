@@ -6,13 +6,12 @@ import { register, inject } from 'ember-preferences/setup';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
 
-var application;
-
+let application;
 
 function isEmber2() {
-  const versionSplit = Ember.VERSION.split('.');
-  const majorVersion = parseInt(versionSplit[0], 10);
-  const minorVersion = parseInt(versionSplit[1], 10);
+  let versionSplit = Ember.VERSION.split('.');
+  let majorVersion = parseInt(versionSplit[0], 10);
+  let minorVersion = parseInt(versionSplit[1], 10);
 
   return majorVersion === 2 && minorVersion > 0;
 }
@@ -28,7 +27,7 @@ if (isEmber2()) {
   });
 
   test('.inject injects the service everywhere', function(assert) {
-    var mock = sinon.mock(application);
+    let mock = sinon.mock(application);
     mock.expects('inject').withArgs('route', 'preferences', 'service:preferences');
     mock.expects('inject').withArgs('controller', 'preferences', 'service:preferences');
     mock.expects('inject').withArgs('component', 'preferences', 'service:preferences');
@@ -47,7 +46,7 @@ if (isEmber2()) {
   test('.register uses localStorage with namespaceable as the storage', function(assert) {
     register(application, { namespace: 'foo' });
 
-    var service = application.resolveRegistration('service:preferences');
+    let service = application.resolveRegistration('service:preferences');
 
     assert.ok(service);
     assert.equal(service.get('_storage').constructor, ExpirableStorage);
@@ -59,7 +58,7 @@ if (isEmber2()) {
   test('.register does not use namespaceable storage when namespaces is false', function(assert) {
     register(application, { namespace: false });
 
-    var service = application.resolveRegistration('service:preferences');
+    let service = application.resolveRegistration('service:preferences');
 
     assert.ok(service);
     assert.equal(service.get('_storage').constructor, ExpirableStorage);

@@ -3,7 +3,7 @@ import { module, test } from 'qunit';
 import Service from 'ember-preferences/service';
 /* global localStorage */
 
-var { computed } = Ember;
+const { computed } = Ember;
 
 module('Unit | Service | preferences', {
   beforeEach() {

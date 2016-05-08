@@ -111,7 +111,7 @@ test('default value function evaluates inside object context', function(assert) 
       }
     },
 
-    preferences: { },
+    preferences: { }
   });
 
   assert.equal(instance.get('foo'), 'pong');
