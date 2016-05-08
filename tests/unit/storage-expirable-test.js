@@ -2,8 +2,8 @@ import { module, test } from 'qunit';
 import MemoryStorage from 'ember-preferences/storage/memory';
 import ExpirableStorage, { expirable } from 'ember-preferences/storage/expirable';
 
-var subject;
-var actualStorage;
+let subject;
+let actualStorage;
 
 function oneSecondInTheFuture() {
   return (+new Date()) + 1000;
