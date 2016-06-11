@@ -2,6 +2,7 @@ import Ember from 'ember';
 import SerializableStorage from 'ember-preferences/storage/serializable';
 import NamespaceableStorage from 'ember-preferences/storage/namespaceable';
 import ExpirableStorage from 'ember-preferences/storage/expirable';
+import DefaultableStorage from 'ember-preferences/storage/defaultable';
 import { register, inject } from 'ember-preferences/setup';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -110,6 +111,15 @@ if (isEmber2()) {
 
     let service = application.resolveRegistration('service:preferences');
     let storage = find(service.get('_storage'), SerializableStorage);
+
+    assert.ok(storage);
+  });
+
+  test('.register adds defaultable decorator', function(assert) {
+    register(application, { });
+
+    let service = application.resolveRegistration('service:preferences');
+    let storage = find(service.get('_storage'), DefaultableStorage);
 
     assert.ok(storage);
   });
