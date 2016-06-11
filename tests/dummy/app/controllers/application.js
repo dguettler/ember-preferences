@@ -3,6 +3,7 @@ import preference from 'ember-preferences/computed';
 
 export default Ember.Controller.extend({
   title: preference('title', { defaultValue: 'Hello World!' }),
+  empty: preference('empty'),
 
   actions: {
     simpleValue() {

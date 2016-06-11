@@ -16,7 +16,9 @@ const page = Ombu.create({
     scope: '.complex-value',
     text: 'h2',
     btn: 'button'
-  }
+  },
+
+  empty: '.empty-value h2'
 });
 
 function text(selector) {
@@ -75,5 +77,31 @@ test('configures namespace', function(assert) {
 
   andThen(function() {
     assert.equal(localStorage.getItem('foo:title'), '"Hey Hey! Bye bye"');
+  });
+});
+
+moduleForAcceptance('Acceptance | application', {
+  setConfiguration() {
+    window.preferenceFixture = {
+      defaults: {
+        empty: 'lorem ipsum'
+      }
+    };
+  },
+
+  beforeEach() {
+    localStorage.clear();
+  },
+
+  afterEach() {
+    delete window.preferenceFixture;
+  }
+});
+
+test('configure default values', function(assert) {
+  visit(page);
+
+  andThen(function() {
+    assert.equal(text(page.empty), 'lorem ipsum');
   });
 });

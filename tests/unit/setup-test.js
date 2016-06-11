@@ -115,12 +115,26 @@ if (isEmber2()) {
     assert.ok(storage);
   });
 
-  test('.register adds defaultable decorator', function(assert) {
+  test('.register adds defaultable decorator with empty defaults', function(assert) {
     register(application, { });
 
     let service = application.resolveRegistration('service:preferences');
     let storage = find(service.get('_storage'), DefaultableStorage);
 
     assert.ok(storage);
+  });
+
+  test('.register adds defaultable decorator with defaults', function(assert) {
+    register(application, {
+      defaults: {
+        foo: 'bar'
+      }
+    });
+
+    let service = application.resolveRegistration('service:preferences');
+    let storage = find(service.get('_storage'), DefaultableStorage);
+
+    assert.ok(storage);
+    assert.equal(storage.get('defaults.foo'), 'bar');
   });
 }
