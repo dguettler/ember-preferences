@@ -8,11 +8,11 @@ export default Ember.Object.extend(DecoratorMixin, {
 
   calculateValue(key, value) {
     if (value === undefined || value === null) {
-       value = this.get('defaults')[key];
+      value = this.get('defaults')[key];
 
-       if (typeof value === 'function') {
-         value = value();
-       }
+      if (typeof value === 'function') {
+        value = value();
+      }
     }
 
     return value;

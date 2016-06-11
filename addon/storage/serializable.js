@@ -7,9 +7,9 @@ export default Ember.Object.extend(DecoratorMixin, {
   },
 
   getItem(key) {
-    var value = this._super(key);
+    let value = this._super(key);
 
-    if (typeof value === 'undefined' || value === null) {
+    if (typeof (value) === 'undefined' || value === null) {
       return value;
     }
 

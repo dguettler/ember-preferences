@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-var { computed } = Ember;
+const { computed } = Ember;
 
 export default Ember.Object.extend({
   db: computed(function() {

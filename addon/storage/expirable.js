@@ -5,17 +5,19 @@ import DecoratorMixin from 'ember-preferences/storage/decorator';
  * @private
  */
 export function isExpirable(value) {
-  return typeof(value) === 'object' && value !== null && value.type === 'expirable';
+  return typeof (value) === 'object' && value !== null && value.type === 'expirable';
 }
 
 /**
  * @private
  */
 export function isExpired(time) {
-  return typeof(time.expirationTime) === 'number' && (+new Date()) > time.expirationTime;
+  return typeof (time.expirationTime) === 'number' && (+new Date()) > time.expirationTime;
 }
 
 /**
+ * @private
+ *
  * Creates a new expirable value
  *
  * @param {Number} expirationTime - absolute time in milliseconds since UNIX epoch
@@ -32,7 +34,7 @@ export function expirable(expirationTime, value) {
 
 export default Ember.Object.extend(DecoratorMixin, {
   getItem(key) {
-    var obj = this._super(key);
+    let obj = this._super(key);
 
     if (isExpirable(obj)) {
       if (isExpired(obj)) {

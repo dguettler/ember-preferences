@@ -1,4 +1,5 @@
 /**
+ * @public
  * @module ember-preferences
  */
 
@@ -18,6 +19,8 @@ function calculateValue(target, value, options) {
 }
 
 /**
+ * @public
+ *
  * Computed property which extends the capabilities of a preference key by
  * adding the possibility of returning a default value.
  *
@@ -26,8 +29,6 @@ function calculateValue(target, value, options) {
  *
  * When `null` or `undefined` is set the computed property returns its default
  * value.
- *
- * @public
  *
  * @example
  *
@@ -83,11 +84,11 @@ function calculateValue(target, value, options) {
  * @return {Ember.ComputedProperty}
  */
 export default function preference(dependentKey, options = {}) {
-  var key = `preferences.${dependentKey}`;
+  let key = `preferences.${dependentKey}`;
 
   return Ember.computed(key, {
     get() {
-      var value = this.get(key);
+      let value = this.get(key);
 
       return calculateValue(this, value, options);
     },

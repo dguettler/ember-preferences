@@ -8,7 +8,7 @@ import DefaultableStorage from 'ember-preferences/storage/defaultable';
 // FIXME: How can I test this? `window.localStorage = ...` is disabled in most browsers
 // See: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
 function isLocalStorageAvailable() {
-  var isAvailable;
+  let isAvailable;
 
   try {
     window.localStorage.setItem('ember-preferences-test', true);
@@ -22,7 +22,7 @@ function isLocalStorageAvailable() {
 }
 
 function localStorage(namespace) {
-  var storage = SerializableStorage.create({
+  let storage = SerializableStorage.create({
     content: window.localStorage
   });
 
@@ -38,10 +38,10 @@ function localStorage(namespace) {
 
 export function register(container, preferences) {
   // Configure the service
-  var storage;
+  let storage;
 
   if (isLocalStorageAvailable()) {
-    storage = localStorage(preferences.namespace)
+    storage = localStorage(preferences.namespace);
   } else {
     storage = MemoryStorage.create();
   }
@@ -65,12 +65,12 @@ export function register(container, preferences) {
 
 export function inject(registry) {
   // Inject the service everywhere
-  ['route', 'controller', 'component'].forEach(type => {
+  ['route', 'controller', 'component'].forEach((type) => {
     // FIXME: We test the registry to know if we're using ember 1.12, 1.13 or +2.0
     if (registry.inject) {
       registry.inject(type, 'preferences', 'service:preferences');
     } else {
-      registry.injection(type, 'preferences', 'service:preferences')
+      registry.injection(type, 'preferences', 'service:preferences');
     }
   });
 }
