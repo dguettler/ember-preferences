@@ -133,6 +133,10 @@ configuration will return it's default value or null.
 
 ## Customizations
 
+You can customize preferences behavior by creating `app/preferences.js` file.
+
+### Namespace
+
 Preferences are stored in local storage using the application name as the
 namespace for each key. You can change this behavior by placing a `preferences.js`
 file in the `app/` folder.
@@ -164,6 +168,21 @@ You can disable the use of namespace by returning a falsy value
 export default function() {
   return {
     namespace: false // disables namespace
+  };
+}
+```
+
+### Global default values
+
+You can configure default values for some keys by adding a map in the
+preferences configuration file.
+
+```js
+export default function() {
+  return {
+    defaults: {
+      foo: 'bar'
+    }
   };
 }
 ```
