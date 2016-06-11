@@ -1,6 +1,6 @@
 import { module, test } from 'qunit';
 import MemoryStorage from 'ember-preferences/storage/memory';
-import ExpirableStorage, { expirable } from 'ember-preferences/storage/expirable';
+import ExpirableStorage, { expirable, isExpirable } from 'ember-preferences/storage/expirable';
 
 let subject;
 let actualStorage;
@@ -16,7 +16,14 @@ function oneSecondInThePast() {
 module('Unit | Storage | expirable decorator', {
   beforeEach() {
     actualStorage = MemoryStorage.create();
-    subject = ExpirableStorage.create({ content: actualStorage });
+    subject = ExpirableStorage.create({
+      content: actualStorage,
+      expirations: {
+        qux() {
+          return oneSecondInTheFuture();
+        }
+      }
+    });
   }
 });
 
@@ -36,4 +43,11 @@ test('.getItem() does not retrieve expired values', function(assert) {
   subject.setItem('foo', expirable(oneSecondInThePast(), 'bar'));
 
   assert.equal(subject.getItem('foo'), undefined);
+});
+
+test('.setItem() applies expiration date to configured values', function(assert) {
+  subject.setItem('qux', 'bar');
+
+  assert.equal(subject.getItem('qux'), 'bar');
+  assert.ok(isExpirable(actualStorage.getItem('qux')));
 });

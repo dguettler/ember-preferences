@@ -186,3 +186,21 @@ export default function() {
   };
 }
 ```
+
+### Global expiration values
+
+You can configure expiration times for some keys by adding a map in the
+preferences configuration file.
+
+```js
+export default function() {
+  return {
+    expirations: {
+      foo() {
+        // one second in the future
+        return (+new Date()) + 1000;
+      }
+    }
+  };
+}
+```
