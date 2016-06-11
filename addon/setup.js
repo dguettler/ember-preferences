@@ -47,6 +47,7 @@ export function register(container, preferences) {
   }
 
   storage = ExpirableStorage.create({
+    expirations: preferences.expirations || {},
     content: storage
   });
 

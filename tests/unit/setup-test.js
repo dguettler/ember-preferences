@@ -89,12 +89,15 @@ if (isEmber2()) {
   });
 
   test('.register adds expirable decorator', function(assert) {
-    register(application, { });
+    let expirations = { foo() {} };
+
+    register(application, { expirations });
 
     let service = application.resolveRegistration('service:preferences');
     let decorator = find(service.get('_storage'), ExpirableStorage);
 
     assert.ok(decorator);
+    assert.deepEqual(decorator.get('expirations'), expirations);
   });
 
   test('.register adds serializable decorator', function(assert) {

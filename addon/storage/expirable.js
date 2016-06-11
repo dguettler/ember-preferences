@@ -44,5 +44,19 @@ export default Ember.Object.extend(DecoratorMixin, {
     }
 
     return obj;
+  },
+
+  setItem(key, value) {
+    this._super(key, this.wrapValue(key, value));
+
+    return value;
+  },
+
+  wrapValue(key, value) {
+    if (this.get('expirations')[key]) {
+      return expirable(this.get('expirations')[key], value);
+    } else {
+      return value;
+    }
   }
 });
