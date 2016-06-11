@@ -4,7 +4,10 @@
 - [Preferences as a service](#preferences-as-a-service)
 - [Preferences as a mixin](#preferences-as-a-mixin)
 - [Computed property](#computed-property)
+- [Shared state](#shared-state)
 - [Customizations](#customizations)
+  - [Namespace](#namespace)
+  - [Global default values](#global-default-values)
 
 ## Installation
 
@@ -130,6 +133,13 @@ export default Ember.Component.extend({
 
 When a value is written it will remain valid for one day. After that time the
 configuration will return it's default value or null.
+
+## Shared state
+
+Configuration values are shared across the entire application. If, for example,
+you declare `preferences('foo')` on two different components, the same value
+will be read and write from the storage, in conclusion the state is shared. If
+you don't want this behavior, use a unique name for each preference.
 
 ## Customizations
 
