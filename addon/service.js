@@ -1,11 +1,13 @@
 /**
+ * @public
  * @module ember-preferences
  */
 
-/* global localStorage */
 import Ember from 'ember';
 
 /**
+ * @public
+ *
  * Ember service which reads and writes configurations directly to local
  * storage.
  *
@@ -13,8 +15,6 @@ import Ember from 'ember';
  * storage, session storage, cookies, etc.).
  *
  * @class Service
- * @public
- *
  * @example
  *
  *   import Ember from 'ember';

@@ -1,18 +1,19 @@
 /**
+ * @public
  * @module ember-preferences
  */
 
 import Ember from 'ember';
 
-var { inject } = Ember;
+const { inject } = Ember;
 
 /**
+ * @public
+ *
  * Mixin to inject the preferences service on other injectable objects, this
  * DRYs up and gives consistency to the code.
  *
  * @class Mixin
- * @public
- *
  * @example
  *
  *   import Ember from 'ember';
