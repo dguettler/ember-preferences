@@ -8,6 +8,7 @@
 - [Customizations](#customizations)
   - [Namespace](#namespace)
   - [Global default values](#global-default-values)
+  - [Global expiration values](#global-expiration-values)
 
 ## Installation
 
