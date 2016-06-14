@@ -21,6 +21,10 @@ module('Unit | Storage | expirable decorator', {
       expirations: {
         qux() {
           return oneSecondInTheFuture();
+        },
+
+        quxx() {
+          return oneSecondInThePast();
         }
       }
     });
@@ -47,7 +51,13 @@ test('.getItem() does not retrieve expired values', function(assert) {
 
 test('.setItem() applies expiration date to configured values', function(assert) {
   subject.setItem('qux', 'bar');
+  subject.setItem('quxx', 'bar');
 
-  assert.equal(subject.getItem('qux'), 'bar');
+  // both values are expirables
   assert.ok(isExpirable(actualStorage.getItem('qux')));
+  assert.ok(isExpirable(actualStorage.getItem('quxx')));
+
+  // only one value is valid
+  assert.equal(subject.getItem('qux'), 'bar');
+  assert.equal(subject.getItem('quxx'), undefined);
 });

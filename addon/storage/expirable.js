@@ -11,8 +11,8 @@ export function isExpirable(value) {
 /**
  * @private
  */
-export function isExpired(time) {
-  return typeof (time.expirationTime) === 'number' && (+new Date()) > time.expirationTime;
+export function isExpired(value) {
+  return typeof (value.expirationTime) === 'number' && (+new Date()) > value.expirationTime;
 }
 
 /**
@@ -55,8 +55,8 @@ export default Ember.Object.extend(DecoratorMixin, {
   },
 
   wrapValue(key, value) {
-    if (this.get('expirations')[key]) {
-      return expirable(this.get('expirations')[key], value);
+    if (typeof (this.get('expirations')[key]) === 'function') {
+      return expirable(this.get('expirations')[key](), value);
     } else {
       return value;
     }
