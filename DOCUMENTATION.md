@@ -248,7 +248,7 @@ export default function() {
       },
       'foo3': {
         // without compression like 'foo2'
-      },
+      }
     }
   };
 }
@@ -266,3 +266,31 @@ ENV['ember-preference'] = {
 ```
 
 Note: When disabling compression be careful every variable has compression disabled in your configuration file.
+
+### onError hook
+
+```js
+export default function() {
+  return {
+    onError(exception, { operationType, key, value }) {
+      console.log(`Error ${exception}`);
+    }
+  };
+}
+```
+
+### ErrorAdapter
+
+```js
+
+const customErrorAdapter = {
+  onSetItemError(error, key, value) {},
+  onGetItemError(error, key) {},
+  onClearError(error) {},
+  removeKeyError(error, key) {}
+};
+
+export default function() {
+
+}
+```
