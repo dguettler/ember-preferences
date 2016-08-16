@@ -135,6 +135,22 @@ export default Ember.Component.extend({
 When a value is written it will remain valid for one day. After that time the
 configuration will return it's default value or null.
 
+__Omit preference name__
+
+You can optionally omit the preference name in which case the name of the
+property will be used.
+
+```js
+import Ember from 'ember';
+import preference from 'ember-preference/computed';
+
+export default Ember.Computed.extend({
+  foo: preference({ defaultValue: 'bar' });
+});
+```
+
+The property `foo` will read and write the preference value from `preferences.foo`.
+
 ## Shared state
 
 Configuration values are shared across the entire application. If, for example,

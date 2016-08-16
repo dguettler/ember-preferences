@@ -18,6 +18,12 @@ const page = Ombu.create({
     btn: 'button'
   },
 
+  serviceValue: {
+    scope: '.service-value',
+    text: 'h2',
+    btn: 'button'
+  },
+
   empty: '.empty-value h2'
 });
 
@@ -52,6 +58,16 @@ test('reads and writes to local storage, even complex values', function(assert) 
 
   andThen(function() {
     assert.equal(text(page.complex.text), 'Complex value!');
+  });
+});
+
+test('listens to preference service changes', function(assert) {
+  visit(page);
+
+  click(page.serviceValue.btn);
+
+  andThen(function() {
+    assert.equal(text(page.serviceValue.text), 'service value updated');
   });
 });
 

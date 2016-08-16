@@ -145,3 +145,14 @@ test('store expirable values (expired)', function(assert) {
   assert.ok(isExpirable(instance.get('foo')), 'Stores expirable objects');
   assert.ok(isExpired(instance.get('foo')), 'Object is expired');
 });
+
+test('does not use property key', function(assert) {
+  let Class = Ember.Object.extend({
+    foo: computed({ defaultValue: 'baz' })
+  });
+  let instance = Class.create({
+    preferences: { }
+  });
+
+  assert.equal(instance.get('foo'), 'baz');
+});
