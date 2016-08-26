@@ -123,7 +123,7 @@ __With expiration date__
 
 ```js
 import Ember from 'ember';
-import preference from 'ember-preference/computed';
+import preference from 'ember-preferences/computed';
 
 const ONE_DAY = 1 * 60 * 60 * 1000;
 
@@ -142,7 +142,7 @@ property will be used.
 
 ```js
 import Ember from 'ember';
-import preference from 'ember-preference/computed';
+import preference from 'ember-preferences/computed';
 
 export default Ember.Computed.extend({
   foo: preference({ defaultValue: 'bar' });
