@@ -231,3 +231,38 @@ export default function() {
   };
 }
 ```
+
+### Compression
+
+You can configure compression for each key by adding a map in the preferences configuration file.
+
+```js
+export default function() {
+  return {
+    configuration: {
+      'foo': {
+        compression: true
+      },
+      'foo2': {
+        compression: false
+      },
+      'foo3': {
+        // without compression like 'foo2'
+      },
+    }
+  };
+}
+```
+
+Compression module is loaded by default, if you are not using compression you can optimize your application
+by disabling it through your config/environment.js file:
+
+```js
+// config/environment.js
+...
+ENV['ember-preference'] = {
+  compression: false
+};
+```
+
+Note: When disabling compression be careful every variable has compression disabled in your configuration file.

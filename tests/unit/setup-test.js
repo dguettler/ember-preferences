@@ -3,6 +3,7 @@ import SerializableStorage from 'ember-preferences/storage/serializable';
 import NamespaceableStorage from 'ember-preferences/storage/namespaceable';
 import ExpirableStorage from 'ember-preferences/storage/expirable';
 import DefaultableStorage from 'ember-preferences/storage/defaultable';
+import CompressibleStorage from 'ember-preferences/storage/compressible';
 import { register, inject } from 'ember-preferences/setup';
 import { module, test } from 'qunit';
 import sinon from 'sinon';
@@ -139,5 +140,21 @@ if (isEmber2()) {
 
     assert.ok(storage);
     assert.equal(storage.get('defaults.foo'), 'bar');
+  });
+
+  test('.register adds compressible decorator', function(assert) {
+    register(application, {
+      configuration: {
+        foo: {
+          compressible: true
+        }
+      }
+    });
+
+    let service = application.resolveRegistration('service:preferences');
+    let storage = find(service.get('_storage'), CompressibleStorage);
+
+    assert.ok(storage);
+    assert.ok(storage.get('configuration.foo.compressible'));
   });
 }

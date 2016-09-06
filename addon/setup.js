@@ -4,6 +4,7 @@ import SerializableStorage from 'ember-preferences/storage/serializable';
 import NamespaceableStorage from 'ember-preferences/storage/namespaceable';
 import ExpirableStorage from 'ember-preferences/storage/expirable';
 import DefaultableStorage from 'ember-preferences/storage/defaultable';
+import CompressibleStorage from 'ember-preferences/storage/compressible';
 
 // FIXME: How can I test this? `window.localStorage = ...` is disabled in most browsers
 // See: https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
@@ -45,6 +46,11 @@ export function register(container, preferences) {
   } else {
     storage = MemoryStorage.create();
   }
+
+  storage = CompressibleStorage.create({
+    configuration: preferences.configuration || {},
+    content: storage
+  });
 
   storage = ExpirableStorage.create({
     expirations: preferences.expirations || {},
