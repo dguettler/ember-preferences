@@ -38,6 +38,22 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   _storage: null,
 
+  setItem(key, value) {
+    this.set(key, value);
+  },
+
+  getItem(key) {
+    return this.get(key);
+  },
+
+  clear() {
+    this.get('_storage').clear();
+  },
+
+  removeItem(key) {
+    this.get('_storage').removeItem(key);
+  },
+
   unknownProperty(key) {
     return this.storage().getItem(key);
   },

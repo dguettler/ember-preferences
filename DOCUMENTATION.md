@@ -52,6 +52,29 @@ export default Ember.Component.extend({
 
 Where `foo` is a property which will be written and read from local storage.
 
+Preferences service also support advanced methods
+
+```js
+import Ember from 'ember';
+
+const { inject } = Ember;
+
+export default Ember.Route.extend({
+  preferences: inject.service('preferences'),
+
+  actions: {
+    doSomething() {
+      let preferences = this.get('preferences');
+
+      preferences.setItem('foo', 'bar');
+      preferences.getItem('foo'); // returns 'bar'
+      preferences.clear(); // clears all data from the store
+      preferences.removeItem('foo'); // removes 'foo' from the store
+    }
+  }
+});
+```
+
 ## Preferences as a mixin
 
 You can use a mixin to inject the `preferences` service, this DRYs up and gives

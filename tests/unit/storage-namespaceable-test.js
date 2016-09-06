@@ -38,11 +38,20 @@ test('.getItem() removes namespace when reading a configuration', function(asser
   assert.equal(subject.getItem('bar'), 'baz');
 });
 
-test('.clears() clears the store', function(assert) {
-  subject.setItem('foo', { bar: 'baz' });
+test('.clears() clears all the keys that belongs to the namespace from the store', function(assert) {
+  actualStorage.setItem('abc:foo', true);
+  actualStorage.setItem('abc:bar', true);
+  actualStorage.setItem('aabc:foo', true);
+  actualStorage.setItem('foo:abc:', true);
+  actualStorage.setItem('abc', true);
+
   subject.clear();
 
-  assert.equal(subject.getItem('foo'), undefined);
+  assert.equal(actualStorage.getItem('abc:foo'), undefined);
+  assert.equal(actualStorage.getItem('abc:bar'), undefined);
+  assert.ok(actualStorage.getItem('aabc:foo'));
+  assert.ok(actualStorage.getItem('foo:abc'));
+  assert.ok(actualStorage.getItem('abc'));
 });
 
 test('.removeItem() removes item', function(assert) {

@@ -38,3 +38,35 @@ test('notifies when a property changes', function(assert) {
 
   assert.equal(object.get('bar'), 'baz');
 });
+
+test('.setItem() stores a value', function(assert) {
+  let service = Service.create({ _storage: localStorage });
+  service.setItem('foo', 'bar');
+
+  assert.equal(localStorage.getItem('foo'), 'bar');
+});
+
+test('.getItem() retrieves a value', function(assert) {
+  let service = Service.create({ _storage: localStorage });
+  localStorage.setItem('baz', 'qux');
+
+  assert.equal(service.getItem('baz'), 'qux');
+});
+
+test('.clear() clears the store', function(assert) {
+  let service = Service.create({ _storage: localStorage });
+  service.setItem('baz', 'qux');
+  service.clear();
+
+  assert.equal(service.getItem('baz'), undefined);
+});
+
+test('.removeItem() removes item', function(assert) {
+  let service = Service.create({ _storage: localStorage });
+  service.setItem('foo', 'bar');
+  service.setItem('baz', 'qux');
+  service.removeItem('baz');
+
+  assert.equal(service.getItem('foo'), 'bar');
+  assert.equal(service.getItem('baz'), undefined);
+});
