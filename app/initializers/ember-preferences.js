@@ -11,6 +11,17 @@ function initialize(application) {
       userPreferences = preferences();
 
   register(container, merge(defaults, userPreferences));
+  cleanLocalStorage(application.name);
+}
+
+function cleanLocalStorage(ep_namespace) {
+  let keys = Object.keys(localStorage);
+  let regex = new RegExp(ep_namespace + ':.+', 'i');
+  for(let k in localStorage) {
+    if (k.match(regex) && (typeof (localStorage[k]) === 'undefined' || (localStorage[k] === null))){
+      localStorage.removeItem(k);
+    }
+  }
 }
 
 export default {
