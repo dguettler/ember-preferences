@@ -9,6 +9,8 @@
   - [Namespace](#namespace)
   - [Global default values](#global-default-values)
   - [Global expiration values](#global-expiration-values)
+  - [Compression](#compression)
+- [Key oriented configuration](#key-oriented-configuration)
 
 ## Installation
 
@@ -266,3 +268,54 @@ ENV['ember-preference'] = {
 ```
 
 Note: When disabling compression be careful every variable has compression disabled in your configuration file.
+
+
+### Key oriented configuration
+
+In order to make more clean the configuration file (`app/preferences.js`), you can add all the customizations you want
+per preference key.
+
+```js
+export default function() {
+  return {
+    configuration: {
+      'foo': {
+        compression: true,
+        default: 'bar'
+      },
+      'foo2': {
+        compression: false, // optional
+        default: 'bar2',
+        expiration: { return (+new Date()) + 1000; }
+      },
+      'foo3': {
+        namespace: 'bar3'
+      },
+    }
+  };
+}
+```
+
+Considerations in compatibilities between Key-oriented-configuration and preference-oriented-configuration:
+
+* When using namespace preference globally and local to each key, it will consider first the existence of the local.
+i.e.
+
+```js
+export default function() {
+  return {
+    configuration: {
+      'foo': {
+        compression: true,
+        default: 'bar'
+      },
+      'foo2': {
+        default: 'bar2',
+        namespace: 'bar3'
+      },
+    },
+    namespace: 'rock_canyon',
+  };
+}
+```
+In the example above, `foo` will have the global namespace `rock_canyon`. However, `foo2` will have the local namespace `bar3`.
