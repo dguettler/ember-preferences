@@ -57,6 +57,8 @@ export default Ember.Object.extend(DecoratorMixin, {
   wrapValue(key, value) {
     if (typeof (this.get('expirations')[key]) === 'function') {
       return expirable(this.get('expirations')[key](), value);
+    else if (typeof (this.get('configuration')[key]) === 'function') {
+      return expirable(this.get('configuration')[key](), value)
     } else {
       return value;
     }

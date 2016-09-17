@@ -59,6 +59,7 @@ export function register(container, preferences) {
 
   storage = DefaultableStorage.create({
     defaults: preferences.defaults || {},
+    configuration: preferences.configuration || {},
     content: storage
   });
 

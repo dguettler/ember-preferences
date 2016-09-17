@@ -20,7 +20,14 @@ export default Ember.Object.extend(DecoratorMixin, {
    * @private
    */
   fullQualifiedKey(key) {
-    let namespace = this.get('namespace');
+    let config = this.get('configuration');
+    let namespace;
+
+    if (config[key] && config[key].namespace) {
+      namespace = config[key].namespace;
+    }
+    namespace =  namespace || this.get('namespace');
+
     let fqk;
 
     if (typeof (namespace) !== 'undefined' && namespace !== null) {
