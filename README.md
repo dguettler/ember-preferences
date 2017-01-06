@@ -19,7 +19,7 @@ See [DOCUMENTATION.md](./DOCUMENTATION.md).
 
 ```js
 import Ember from 'ember';
-import preference from 'ember-preference';
+import preference from 'ember-preferences/computed';
 
 export default Ember.Component.extend({
   isVisible: preference('isVisible', { defaultValue: true }),
