@@ -1,16 +1,14 @@
 import { register } from 'ember-preferences/setup';
 import defaultPreferences from '../-ember-preferences-internal';
 import preferences from '../preferences';
+import { assign } from '@ember/polyfills';
 
-var merge = Ember.assign || Ember.merge;
+export function initialize(application) {
+  const defaults = defaultPreferences();
+  const userPreferences = preferences();
 
-function initialize(application) {
-  // FIXME: We test the application to know if we're using ember 1.12, 1.13 or +2.0
-  var container = application.register ? application : application.container,
-      defaults = defaultPreferences(),
-      userPreferences = preferences();
-
-  register(container, merge(defaults, userPreferences));
+  // application.inject('route', 'foo', 'service:foo');
+  register(application, assign(defaults, userPreferences));
 }
 
 export default {

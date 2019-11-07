@@ -3,7 +3,7 @@
  * @module ember-preferences
  */
 
-import Ember from 'ember';
+import ComputedProperty from '@ember/object/computed';
 import { expirable } from 'ember-preferences/storage/expirable';
 
 function calculateValue(target, value, options) {
@@ -32,57 +32,61 @@ function calculateValue(target, value, options) {
  *
  * @example
  *
- *   import Ember from 'ember';
+ *   import Component from '@ember/component';
+ *   import { computed } from '@ember/object';
+ *   import { inject as service } from '@ember/service';
  *   import preference from 'ember-preferences/computed';
  *
- *   const { computed, inject } = Ember;
- *
- *   export default Ember.Component.extend({
- *     preferences: inject.service(),
+ *   export default Component.extend({
+ *     preferences: service(),
  *     foo: preference('bar')
  *   });
  *
  * @example <caption>With default values</caption>
  *
- *   import Ember from 'ember';
+ *   import Component from '@ember/component';
+ *   import { computed } from '@ember/object';
+ *   import { inject as service } from '@ember/service';
  *   import preference from 'ember-preferences/computed';
  *
- *   const { computed, inject } = Ember;
- *
- *   export default Ember.Component.extend({
- *     preferences: inject.service(),
+ *   export default Component.extend({
+ *     preferences: service(),
  *     foo: preference('bar', { defaultValue: 'hello world!' })
  *   });
  *
  * @example <caption>With a function as default value</caption>
  *
- *   import Ember from 'ember';
+ *   import Component from '@ember/component';
+ *   import { computed } from '@ember/object';
+ *   import { inject as service } from '@ember/service';
  *   import preference from 'ember-preferences/computed';
  *
- *   const { computed, inject } = Ember;
- *
- *   export default Ember.Component.extend({
- *     preferences: inject.service(),
+ *   export default Component.extend({
+ *     preferences: service(),
  *     foo: preference('bar', { defaultValue() { return ['an', 'array']; } })
  *   });
  *
  * @example <caption>With expiration date</caption>
  *
- *   import Ember from 'ember';
- *   import preference from 'ember-preference/computed';
+ *   import Component from '@ember/component';
+ *   import { computed } from '@ember/object';
+ *   import { inject as service } from '@ember/service';
+ *   import preference from 'ember-preferences/computed';
  *
  *   const ONE_DAY = 1 * 60 * 60 * 1000;
  *
- *   export default Ember.Component.extend({
+ *   export default Component.extend({
  *     foo: preference('bar', { expires() { return +new Date() + ONE_DAY; } })
  *   });
  *
  * @example <caption>Optional dependentKey</caption>
  *
- *   import Ember from 'ember';
- *   import preference from 'ember-preference/computed';
+ *   import Component from '@ember/component';
+ *   import { computed } from '@ember/object';
+ *   import { inject as service } from '@ember/service';
+ *   import preference from 'ember-preferences/computed';
  *
- *   export default Ember.Component.extend({
+ *   export default Component.extend({
  *     // `foo` is going to be used as the dependentKey
  *     foo: preference(),
  *
@@ -94,7 +98,7 @@ function calculateValue(target, value, options) {
  * @param {Object} options - Additional options
  * @param {Function|Any} options.defaultValue - Default value to return when the preference value is null or undefined
  * @param {Function} options.expires - Function that returns the absolute expiration date - time in milliseconds since the UNIX epoch
- * @return {Ember.ComputedProperty}
+ * @return {ComputedProperty}
  */
 export default function preference(dependentKey, options) {
   if (typeof (dependentKey) === 'object') {
@@ -104,7 +108,7 @@ export default function preference(dependentKey, options) {
 
   options = options || {};
 
-  let cp = new Ember.ComputedProperty({
+  let cp = new ComputedProperty({
     get(key) {
       let { preferencesKey } = this.constructor.metaForProperty(key);
       let value = this.get(preferencesKey);

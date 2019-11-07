@@ -1,10 +1,9 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import { computed } from '@ember/object';
 
-const { computed } = Ember;
-
-export default Ember.Object.extend({
+export default EmberObject.extend({
   db: computed(function() {
-    return Ember.Object.create();
+    return EmberObject.create();
   }),
 
   setItem(key, value) {
@@ -16,7 +15,7 @@ export default Ember.Object.extend({
   },
 
   clear() {
-    this.set('db', Ember.Object.create());
+    this.set('db', EmberObject.create());
   },
 
   removeItem(key) {

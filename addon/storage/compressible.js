@@ -1,11 +1,11 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 import DecoratorMixin from 'ember-preferences/storage/decorator';
 /* global LZString */
 
 /**
  * @private
  */
-export default Ember.Object.extend(DecoratorMixin, {
+export default EmberObject.extend(DecoratorMixin, {
   configuration: null,
 
   getItem(key) {

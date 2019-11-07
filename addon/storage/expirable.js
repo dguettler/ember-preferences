@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 import DecoratorMixin from 'ember-preferences/storage/decorator';
 
 /**
@@ -32,7 +32,7 @@ export function expirable(expirationTime, value) {
   };
 }
 
-export default Ember.Object.extend(DecoratorMixin, {
+export default EmberObject.extend(DecoratorMixin, {
   getItem(key) {
     let obj = this._super(key);
 

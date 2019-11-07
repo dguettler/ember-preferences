@@ -1,7 +1,6 @@
-/*jshint node:true*/
 'use strict';
 
-module.exports = function(environment, appConfig) {
+module.exports = function(_, appConfig) {
   appConfig['compression-activate'] = appConfig['compression-activate'] || { compression: true };
 
   return { };

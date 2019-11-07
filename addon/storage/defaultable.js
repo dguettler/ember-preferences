@@ -1,7 +1,7 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
 import DecoratorMixin from 'ember-preferences/storage/decorator';
 
-export default Ember.Object.extend(DecoratorMixin, {
+export default EmberObject.extend(DecoratorMixin, {
   getItem(key) {
     return this.calculateValue(key, this._super(key));
   },

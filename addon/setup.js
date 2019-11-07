@@ -68,15 +68,3 @@ export function register(container, preferences) {
     { instantiate: false }
   );
 }
-
-export function inject(registry) {
-  // Inject the service everywhere
-  ['route', 'controller', 'component'].forEach((type) => {
-    // FIXME: We test the registry to know if we're using ember 1.12, 1.13 or +2.0
-    if (registry.inject) {
-      registry.inject(type, 'preferences', 'service:preferences');
-    } else {
-      registry.injection(type, 'preferences', 'service:preferences');
-    }
-  });
-}

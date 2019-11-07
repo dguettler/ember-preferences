@@ -3,9 +3,8 @@
  * @module ember-preferences
  */
 
-import Ember from 'ember';
-
-const { inject } = Ember;
+import Mixin from '@ember/object/mixin';
+import { inject as service } from '@ember/service';
 
 /**
  * @public
@@ -16,18 +15,19 @@ const { inject } = Ember;
  * @class Mixin
  * @example
  *
- *   import Ember from 'ember';
+ *   import Component from '@ember/component';
  *   import PreferencesMixin from 'ember-preferences/mixin';
+ *   import { alias } from '@ember/object/computed';
  *
- *   export default Ember.Component.extend(PreferencesMixin, {
- *     foo: Ember.computed.alias('preferences.foo')
+ *   export default Component.extend(PreferencesMixin, {
+ *     foo: alias('preferences.foo')
  *   });
  */
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
    * @property preferences
    * @type {Ember.Service}
    * @public
    */
-  preferences: inject.service()
+  preferences: service()
 });

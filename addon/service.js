@@ -3,7 +3,7 @@
  * @module ember-preferences
  */
 
-import Ember from 'ember';
+import Service from '@ember/service';
 
 /**
  * @public
@@ -17,25 +17,27 @@ import Ember from 'ember';
  * @class Service
  * @example
  *
- *   import Ember from 'ember';
- *   const { computed, inject } = Ember;
+ *   import Component from '@ember/component';
+ *   import { alias } from '@ember/object/computed';
+ *   import { inject as service } from '@ember/service';
  *
  *   export default Ember.Component.extend({
- *     preferences: inject.service(),
- *     foo: computed.alias('preferences.foo')
+ *     preferences: service(),
+ *     foo: alias('preferences.foo')
  *   });
  *
  * @example <caption>Injecting the service with a different property name</caption>
  *
- *   import Ember from 'ember';
- *   const { inject } = Ember;
+ *   import Component from '@ember/component';
+ *   import { alias } from '@ember/object/computed';
+ *   import { inject as service } from '@ember/service';
  *
  *   export default Ember.Component.extend({
- *     userOptions: inject.service('preferences'),
- *     foo: computed.alias('userOptions.foo')
+ *     userOptions: service('preferences'),
+ *     foo: alias('userOptions.foo')
  *   });
  */
-export default Ember.Service.extend({
+export default Service.extend({
   _storage: null,
 
   unknownProperty(key) {
