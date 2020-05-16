@@ -9,7 +9,7 @@ export default EmberObject.extend(DecoratorMixin, {
   getItem(key) {
     let value = this._super(key);
 
-    if (typeof (value) === 'undefined' || value === null) {
+    if (typeof (value) === 'undefined' || value === null || value === '') {
       return value;
     }
 
